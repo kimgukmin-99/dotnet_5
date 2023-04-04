@@ -167,7 +167,8 @@ namespace ConsoleApp5
 
 
                     case "3":   //음악재생 클래스
-                        while (true)
+                        int temp_music = 0;
+                        while (temp_music == 0)
                         {
                             Console.WriteLine("1. 재생목록 저장");
                             Console.WriteLine("2. 플레이리스트 보기");
@@ -196,7 +197,7 @@ namespace ConsoleApp5
 
                                 case "2":
                                     Console.WriteLine("플레이리스트 목록");
-                                    Console.WriteLine("제목          가수명          ");
+                                    Console.WriteLine("제목               가수명          ");
                                     Console.WriteLine("----------------------------------------");
 
                                     foreach (Music p in musics)
@@ -209,11 +210,14 @@ namespace ConsoleApp5
 
                                 case "3":
                                     Console.WriteLine("재생할 음악을 선택해 주세요.");
+                                    input_music = Console.ReadLine();
+                                    Console.WriteLine(input_music + "이 재생 중입니다.");
                                     break;
                                     
 
                                 case "4":
                                     Console.WriteLine("프로그램을 종료합니다.");
+                                    temp_music = 1;
                                     break;
                                     
 
@@ -223,6 +227,7 @@ namespace ConsoleApp5
                                     break;
                             }
                         }
+                        continue;
                 
 
                       
