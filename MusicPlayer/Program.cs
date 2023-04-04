@@ -41,11 +41,11 @@ public class Post
 public class Reservation
 {
     public string GuestName { get; set; }  // 투숙객 이름
-    public int PhoneNumber { get; set; }    // 방 번호
+    public string PhoneNumber { get; set; }    // 휴대폰 번호
     public DateTimeOffset CheckInDate { get; set; }  // 체크인 날짜
     public DateTimeOffset CheckOutDate { get; set; } // 체크아웃 날짜
 
-    public Reservation(string guestName, int phoneNumber, DateTimeOffset checkInDate, DateTimeOffset checkOutDate)
+    public Reservation(string guestName, string phoneNumber, DateTimeOffset checkInDate, DateTimeOffset checkOutDate)
     {
         GuestName = guestName;
         PhoneNumber = phoneNumber;
@@ -130,7 +130,7 @@ namespace ConsoleApp5
                         Console.Write("이름을 입력해주세요: ");
                         string name = Console.ReadLine();
                         Console.Write("전화번호를 입력해주세요: ");
-                        int phoneNumber = int.Parse(Console.ReadLine());
+                        string phoneNumber = Console.ReadLine();
                         Console.Write("체크인 날짜를 입력해주세요(yyyy-MM-dd): ");
                         DateTimeOffset checkIn = DateTimeOffset.Parse(Console.ReadLine());
                         Console.Write("체크아웃 날짜를 입력해주세요(yyyy-MM-dd): ");
