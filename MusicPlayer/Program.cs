@@ -63,6 +63,43 @@ public class Reservation
     }
 }
 
+public class StockInvestment
+{
+    public string Company { get; set; } // 회사명
+    public int NumberOfShares { get; set; } // 주식 수량
+    public decimal BuyPrice { get; set; } // 매수 가격
+    public decimal CurrentPrice { get; set; } // 현재 가격
+
+    public StockInvestment(string company, int numberOfShares, decimal buyPrice, decimal currentPrice)
+    {
+        Company = company;
+        NumberOfShares = numberOfShares;
+        BuyPrice = buyPrice;
+        CurrentPrice = currentPrice;
+    }
+
+    public decimal GetCurrentTotalValue()
+    {
+        return NumberOfShares * CurrentPrice;
+    }
+
+    public decimal GetProfitOrLoss()
+    {
+        return GetCurrentTotalValue() - NumberOfShares * BuyPrice;
+    }
+
+    public void PrintStockInfo()
+    {
+        Console.WriteLine("주식 정보:");
+        Console.WriteLine("회사명: " + Company);
+        Console.WriteLine("주식 수량: " + NumberOfShares);
+        Console.WriteLine("매수 가격: " + BuyPrice.ToString("C"));
+        Console.WriteLine("현재 가격: " + CurrentPrice.ToString("C"));
+        Console.WriteLine("현재 총 가치: " + GetCurrentTotalValue().ToString("C"));
+        Console.WriteLine("손익: " + GetProfitOrLoss().ToString("C"));
+    }
+}
+
 namespace ConsoleApp5
 {
 
@@ -228,8 +265,22 @@ namespace ConsoleApp5
                       
 
                     case "4":   //주식투자 시뮬레이션
+                        Console.WriteLine("=== 주식 투자 시뮬레이션 ===");
+                        Console.Write("회사명을 입력해주세요: ");
+                        string company = Console.ReadLine();
+                        Console.Write("주식 수량을 입력해주세요: ");
+                        int numberOfShares = int.Parse(Console.ReadLine());
+                        Console.Write("매수 가격을 입력해주세요: ");
+                        decimal buyPrice = decimal.Parse(Console.ReadLine());
+                        Console.Write("현재 가격을 입력해주세요: ");
+                        decimal currentPrice = decimal.Parse(Console.ReadLine());
 
-                        return;
+                        StockInvestment stockInvestment = new StockInvestment(company, numberOfShares, buyPrice, currentPrice);
+
+                        stockInvestment.PrintStockInfo();
+
+                        Console.WriteLine();
+                        break;
                 }
             }
 
