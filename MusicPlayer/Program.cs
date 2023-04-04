@@ -28,7 +28,8 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            
+            Music music1 = new Music("love dive", "ive");
+            music1.Music_Start(music1);
         }
     }
 }
