@@ -38,6 +38,30 @@ public class Post
     }
 }
 
+public class Reservation
+{
+    public string GuestName { get; set; }  // 투숙객 이름
+    public int PhoneNumber { get; set; }    // 방 번호
+    public DateTimeOffset CheckInDate { get; set; }  // 체크인 날짜
+    public DateTimeOffset CheckOutDate { get; set; } // 체크아웃 날짜
+
+    public Reservation(string guestName, int phoneNumber, DateTimeOffset checkInDate, DateTimeOffset checkOutDate)
+    {
+        GuestName = guestName;
+        PhoneNumber = phoneNumber;
+        CheckInDate = checkInDate;
+        CheckOutDate = checkOutDate;
+    }
+
+    public void PrintReservationInfo()
+    {
+        Console.WriteLine("예약 정보:");
+        Console.WriteLine("투숙객 이름: " + GuestName);
+        Console.WriteLine("방 번호: " + PhoneNumber);
+        Console.WriteLine("체크인 날짜: " + CheckInDate.ToString("yyyy년 MM월 dd일"));
+        Console.WriteLine("체크아웃 날짜: " + CheckOutDate.ToString("yyyy년 MM월 dd일"));
+    }
+}
 
 namespace ConsoleApp5
 {
@@ -48,6 +72,7 @@ namespace ConsoleApp5
         {
             List<Post> posts = new List<Post>(); //게시판리스트 생성
             List<Music> musics = new List<Music>();//음악재생리스트 생성
+            List<Reservation> reservations = new List<Reservation>(); //호텔예약 리스트 생성
 
             while (true)
             {
@@ -64,7 +89,23 @@ namespace ConsoleApp5
                 {
 
                     case "1": //호텔예약
-                        return;
+                        Console.WriteLine("=== 호텔 예약 ===");
+                        Console.Write("이름을 입력해주세요: ");
+                        string name = Console.ReadLine();
+                        Console.Write("전화번호를 입력해주세요: ");
+                        int phoneNumber = int.Parse(Console.ReadLine());
+                        Console.Write("체크인 날짜를 입력해주세요(yyyy-MM-dd): ");
+                        DateTimeOffset checkIn = DateTimeOffset.Parse(Console.ReadLine());
+                        Console.Write("체크아웃 날짜를 입력해주세요(yyyy-MM-dd): ");
+                        DateTimeOffset checkOut = DateTimeOffset.Parse(Console.ReadLine());
+
+                        Reservation reservation = new Reservation(name, phoneNumber, checkIn, checkOut);
+                        reservations.Add(reservation);
+
+                        Console.WriteLine();
+                        Console.WriteLine("예약이 완료되었습니다.");
+                        Console.WriteLine();
+                        break;
 
 
 
