@@ -181,12 +181,12 @@ namespace ConsoleApp5
                             {
                                 case "1":
                                     Console.Write("제목: ");
-                                    string name = Console.ReadLine();
+                                    string name1 = Console.ReadLine();
 
                                     Console.Write("가수명: ");
                                     string author = Console.ReadLine();
 
-                                    Music music = new Music(name, author);
+                                    Music music = new Music(name1, author);
                                     musics.Add(music);
 
                                     Console.WriteLine();
@@ -208,9 +208,9 @@ namespace ConsoleApp5
                                     break;
 
                                 case "3":
-                                    Console.WriteLine("");
+                                    Console.WriteLine("재생할 음악을 선택해 주세요.");
                                     break;
-                                    continue;
+                                    
 
                                 case "4":
                                     Console.WriteLine("프로그램을 종료합니다.");
