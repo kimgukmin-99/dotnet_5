@@ -126,7 +126,63 @@ namespace ConsoleApp5
 
 
                     case "3":   //음악재생 클래스
-                        return;
+                        while (true)
+                        {
+                            Console.WriteLine("1. 재생목록 저장");
+                            Console.WriteLine("2. 플레이리스트 보기");
+                            Console.WriteLine("3. 음악 재생");
+                            Console.WriteLine("4. 종료");
+                            Console.Write("선택: ");
+                            string input_music = Console.ReadLine();
+                            Console.WriteLine();
+
+                            switch (input_music)
+                            {
+                                case "1":
+                                    Console.Write("제목: ");
+                                    string name = Console.ReadLine();
+
+                                    Console.Write("가수명: ");
+                                    string author = Console.ReadLine();
+
+                                    Music music = new Music(name, author);
+                                    musics.Add(music);
+
+                                    Console.WriteLine();
+                                    Console.WriteLine("재생목록에 저장되었습니다.");
+                                    Console.WriteLine();
+                                    break;
+
+                                case "2":
+                                    Console.WriteLine("플레이리스트 목록");
+                                    Console.WriteLine("제목          가수명          ");
+                                    Console.WriteLine("----------------------------------------");
+
+                                    foreach (Music p in musics)
+                                        {
+                                        Console.WriteLine("{0}           {1}", p.Name, p.Author);
+                                        }
+                                    Console.WriteLine("----------------------------------------");
+                                    Console.WriteLine();
+                                    break;
+
+                                case "3":
+                                    Console.WriteLine("");
+                                    break;
+                                    continue;
+
+                                case "4":
+                                    Console.WriteLine("프로그램을 종료합니다.");
+                                    break;
+                                    
+
+                                default:
+                                    Console.WriteLine("잘못된 입력입니다. 다시 선택해주세요.");
+                                    Console.WriteLine();
+                                    break;
+                            }
+                        }
+                
 
                       
 
