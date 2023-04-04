@@ -69,7 +69,8 @@ namespace ConsoleApp5
 
 
                     case "2":   //게시판클래스
-                        while (true)
+                        int temp = 0;
+                        while (temp == 0)
                         {
                             Console.WriteLine("1. 글쓰기");
                             Console.WriteLine("2. 글 목록 보기");
@@ -110,6 +111,7 @@ namespace ConsoleApp5
 
                                 case "3":
                                     Console.WriteLine("프로그램을 종료합니다.");
+                                    temp = 1;
                                     break;
 
                                 default:
@@ -118,6 +120,7 @@ namespace ConsoleApp5
                                     break;
                             }
                         }
+                        continue;
 
 
 
