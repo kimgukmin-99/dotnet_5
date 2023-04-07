@@ -2,25 +2,57 @@
 using System.Collections.Generic;
 public class Music
 {
-    public string Name { get; set; }
-    public string Author { get; set; }
+    // 인스턴스 변수
+    private string name;
+    private string author;
+
+    // 속성
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public string Author
+    {
+        get { return author; }
+        set { author = value; }
+    }
+
+    // 클래스 변수
+    private static int numInstances = 0;
+
+    // 생성자
     public Music(string name, string author)
     {
         Name = name;
         Author = author;
+        numInstances++;
     }
 
-    public void Music_Start(Music name)
+    // 메소드 오버로딩
+    public void Music_Start()
     {
-        string str = name.Name + " " + Author + " " + " 재생중입니다.";
-        Console.WriteLine(str);
+        Console.WriteLine(Name + " " + Author + " 재생중입니다.");
+    }
+
+    public void Music_Start(string playlistName)
+    {
+        Console.WriteLine("재생목록 " + playlistName + " 에서 " + Name + " " + Author + " 재생중입니다.");
     }
 
     public void Music_Stop()
     {
-        Console.WriteLine("재생중인 음악 종료");
+        Console.WriteLine(Name + " " + Author + " 재생 중지");
+    }
+
+    // 클래스 메소드
+    public static int GetNumInstances()
+    {
+        return numInstances;
     }
 }
+
 
 public class Post
 {
