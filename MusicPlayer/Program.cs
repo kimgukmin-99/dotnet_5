@@ -54,8 +54,74 @@ public class Music
 }
 
 
-public class Post
+class Board
 {
+    // 클래스 변수
+    private static int boardCount = 0;
+
+    // 인스턴스 변수
+    private int boardId;
+    private string name;
+    private List<Post> posts;
+    private List<Comment> comments;
+
+    // 속성
+    public int BoardId
+    {
+        get { return boardId; }
+        set { boardId = value; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    // 생성자
+    public Board(string name)
+    {
+        this.boardId = boardCount;
+        this.name = name;
+        this.posts = new List<Post>();
+        this.comments = new List<Comment>();
+        boardCount++;
+    }
+
+    // 인스턴스 메서드
+    public void AddPost(Post post)
+    {
+        posts.Add(post);
+    }
+
+    public void AddComment(Comment comment)
+    {
+        comments.Add(comment);
+    }
+
+    // 메소드 오버로딩
+    public void DeletePost(int postId)
+    {
+        foreach (Post p in posts)
+        {
+            if (p.PostId == postId)
+            {
+                posts.Remove(p);
+                return;
+            }
+        }
+    }
+
+    public void DeletePost(Post post)
+    {
+        posts.Remove(post);
+    }
+}
+
+
+class Post
+{
+    public int PostId { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
@@ -70,12 +136,23 @@ public class Post
     }
 }
 
+class Comment
+{
+    public int CommentId { get; set; }
+    public int PostId { get; set; }
+    public string Content { get; set; }
+}
+
+
 public class Reservation
 {
-    public string GuestName { get; set; }  // 투숙객 이름
-    public string PhoneNumber { get; set; }    // 휴대폰 번호
-    public DateTimeOffset CheckInDate { get; set; }  // 체크인 날짜
-    public DateTimeOffset CheckOutDate { get; set; } // 체크아웃 날짜
+    private static int reservationCount;  // 클래스 변수 - 전체 예약 수
+
+    public string GuestName { get; set; }  // 속성 - 투숙객 이름
+    public string PhoneNumber { get; set; }    // 속성 - 휴대폰 번호
+    public DateTimeOffset CheckInDate { get; set; }  // 속성 - 체크인 날짜
+    public DateTimeOffset CheckOutDate { get; set; } // 속성 - 체크아웃 날짜
+    public int ReservationId { get; private set; }  // 속성 - 예약 번호 (읽기 전용)
 
     public Reservation(string guestName, string phoneNumber, DateTimeOffset checkInDate, DateTimeOffset checkOutDate)
     {
@@ -83,15 +160,33 @@ public class Reservation
         PhoneNumber = phoneNumber;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
+        reservationCount++;  // 예약 수 증가
+        ReservationId = reservationCount;  // 예약 번호 할당
     }
 
     public void PrintReservationInfo()
     {
         Console.WriteLine("예약 정보:");
+        Console.WriteLine("예약 번호: " + ReservationId);
         Console.WriteLine("투숙객 이름: " + GuestName);
         Console.WriteLine("방 번호: " + PhoneNumber);
         Console.WriteLine("체크인 날짜: " + CheckInDate.ToString("yyyy년 MM월 dd일"));
         Console.WriteLine("체크아웃 날짜: " + CheckOutDate.ToString("yyyy년 MM월 dd일"));
+    }
+
+    // 메소드 오버로딩 - 예약 수정 기능 추가
+    public void ModifyReservation(DateTimeOffset checkInDate, DateTimeOffset checkOutDate)
+    {
+        CheckInDate = checkInDate;
+        CheckOutDate = checkOutDate;
+        Console.WriteLine("예약 정보가 수정되었습니다.");
+    }
+
+    // 메소드 오버로딩 - 예약 취소 기능 추가
+    public void CancelReservation()
+    {
+        Console.WriteLine("예약이 취소되었습니다.");
+        reservationCount--;  // 예약 수 감소
     }
 }
 
