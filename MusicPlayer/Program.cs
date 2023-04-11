@@ -97,11 +97,41 @@ public class Reservation
 
 public class StockInvestment
 {
-    public string Company { get; set; } // 회사명
-    public int NumberOfShares { get; set; } // 주식 수량
-    public decimal BuyPrice { get; set; } // 매수 가격
-    public decimal CurrentPrice { get; set; } // 현재 가격
+    // 인스턴스 변수
+    private string company;
+    private int numberOfShares;
+    private decimal buyPrice;
+    private decimal currentPrice;
 
+    // 클래스 변수
+    private static decimal commissionRate = 0.05m;
+
+    // 속성
+    public string Company
+    {
+        get { return company; }
+        set { company = value; }
+    }
+
+    public int NumberOfShares
+    {
+        get { return numberOfShares; }
+        set { numberOfShares = value; }
+    }
+
+    public decimal BuyPrice
+    {
+        get { return buyPrice; }
+        set { buyPrice = value; }
+    }
+
+    public decimal CurrentPrice
+    {
+        get { return currentPrice; }
+        set { currentPrice = value; }
+    }
+
+    // 생성자
     public StockInvestment(string company, int numberOfShares, decimal buyPrice, decimal currentPrice)
     {
         Company = company;
@@ -110,6 +140,11 @@ public class StockInvestment
         CurrentPrice = currentPrice;
     }
 
+    // 메소드 오버로딩
+    public StockInvestment(string company, int numberOfShares, decimal buyPrice)
+        : this(company, numberOfShares, buyPrice, 0) { }
+
+    // 메소드
     public decimal GetCurrentTotalValue()
     {
         return NumberOfShares * CurrentPrice;
@@ -118,6 +153,11 @@ public class StockInvestment
     public decimal GetProfitOrLoss()
     {
         return GetCurrentTotalValue() - NumberOfShares * BuyPrice;
+    }
+
+    public decimal GetProfitOrLoss(decimal commission)
+    {
+        return GetCurrentTotalValue() - NumberOfShares * BuyPrice - commission;
     }
 
     public void PrintStockInfo()
@@ -129,6 +169,17 @@ public class StockInvestment
         Console.WriteLine("현재 가격: " + CurrentPrice.ToString("C"));
         Console.WriteLine("현재 총 가치: " + GetCurrentTotalValue().ToString("C"));
         Console.WriteLine("손익: " + GetProfitOrLoss().ToString("C"));
+    }
+
+    // 클래스 메소드
+    public static void SetCommissionRate(decimal rate)
+    {
+        commissionRate = rate;
+    }
+
+    public static decimal GetCommissionRate()
+    {
+        return commissionRate;
     }
 }
 
@@ -298,9 +349,6 @@ namespace ConsoleApp5
                         }
                         continue;
                 
-
-                      
-
                     case "4":   //주식투자 시뮬레이션
                         Console.WriteLine("=== 주식 투자 시뮬레이션 ===");
                         Console.Write("회사명을 입력해주세요: ");
